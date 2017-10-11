@@ -64,7 +64,7 @@ def test_code(test_case):
 
     ## Insert IK code here!
     
-    theta1 = 0
+    theta1 = 10
     theta2 = 0
     theta3 = 0
     theta4 = 0
