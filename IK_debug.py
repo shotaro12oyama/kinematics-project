@@ -126,7 +126,7 @@ def test_code(test_case):
                     [-sin(p), 0,  cos(p)]])  # PITCH
     
     ROT_z = Matrix([[cos(y), -sin(y),  0],
-                    [sin(y),  cos(r),  0],
+                    [sin(y),  cos(y),  0],
                     [0,            0,  1]])  # YAW
     
     ROT_EE = ROT_z * ROT_y * ROT_x
