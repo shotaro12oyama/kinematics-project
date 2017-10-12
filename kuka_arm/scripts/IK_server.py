@@ -31,23 +31,22 @@ def handle_calculate_IK(req):
         ### Your FK code here
             JointTrajectoryPoint = JointTrajectoryPoint()
 
-        # Create symbols
-	#
-	#   d1, d2, d3, d4, d5, d6, d7 = symbols('d1:8') # link offset
-    a0, a1, a2, a3, a4, a5, a6 = symbols('a0:7') # link length
-    alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # twist angle
+            # Create symbols
+            #   d1, d2, d3, d4, d5, d6, d7 = symbols('d1:8') # link offset
+            a0, a1, a2, a3, a4, a5, a6 = symbols('a0:7') # link length
+            alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # twist angle
 
-    # joint angle symbols
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')
+            # joint angle symbols
+            q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')
 
-    # More information can be found in KR210 Forward Kinematics section
-    DH_Table = {    alpha0:      0, a0:      0,   d1:  0.75,   q1:         q1,
-                    alpha1: -pi/2., a1:   0.35,   d2:     0,   q2: -pi/2 + q2,
-                    alpha2:      0, a2:   1.25,   d3:     0,   q3:         q3,
-                    alpha3: -pi/2., a3: -0.054,   d4:   1.5,   q4:         q4,
-                    alpha4: -pi/2., a4:      0,   d5:     0,   q5:         q5,
-                    alpha5: -pi/2., a5:      0,   d6:     0,   q6:         q6,
-                    alpha6:      0, a6:      0,   d7: 0.303,   q7:          0,}
+            # More information can be found in KR210 Forward Kinematics section
+            DH_Table = {    alpha0:      0, a0:      0,   d1:  0.75,   q1:         q1,
+                            alpha1: -pi/2., a1:   0.35,   d2:     0,   q2: -pi/2 + q2,
+                            alpha2:      0, a2:   1.25,   d3:     0,   q3:         q3,
+                            alpha3: -pi/2., a3: -0.054,   d4:   1.5,   q4:         q4,
+                            alpha4: -pi/2., a4:      0,   d5:     0,   q5:         q5,
+                            alpha5: -pi/2., a5:      0,   d6:     0,   q6:         q6,
+                            alpha6:      0, a6:      0,   d7: 0.303,   q7:          0,}
 
     # Define Modified DH Tranformation matrix
     def TF_Matrix(alpha, a, d, q):
