@@ -97,7 +97,18 @@ def test_code(test_case):
     T5_6 = TF_Matrix(alpha5, a5, d6, q6).subs(DH_Table)
     T6_EE = TF_Matrix(alpha6, a6, d7, q7).subs(DH_Table)
 
-    T6_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
+    T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
+
+    # Extract end-effector position and orientation from request
+    # px, py, pz is end effector position
+    # roll, pitch, yaw = end effector orientation
+    px = req.poses[x].position.x
+    py = req.poses[x].position.y
+    pz = req.poses[x].position.z
+
+    (roll, pitch, yaw) = tf.transformations.euler_from_quaternion(
+        [req.poses[x].orientation.x, req.poses[x].orientation.y,
+            req.poses[x].orientation.z, req.poses[x].orientation.w])
 
     # Find EE rotation matrix
     # Define RPY rotation matices
