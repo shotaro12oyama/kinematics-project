@@ -99,6 +99,7 @@ class KCalc():
         theta6 = atan2(-R3_6[1,1], R3_6[1,0])
         theta = [theta1, theta2, theta3, theta4, theta5, theta6]
         return theta
+    print("Initialize Parameters")
 
 
 def handle_calculate_IK(req):
@@ -123,7 +124,7 @@ def handle_calculate_IK(req):
                 [req.poses[x].orientation.x, req.poses[x].orientation.y,
                     req.poses[x].orientation.z, req.poses[x].orientation.w])
             
-            theta = KCalc.IK_parameter(px, py, pz, roll, pitch, yaw)
+            theta = KC.IK_parameter(px, py, pz, roll, pitch, yaw)
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
@@ -142,6 +143,6 @@ def IK_server():
     rospy.spin()
 
 if __name__ == "__main__":
-    KCalc()
+    KC = KCalc()
     IK_server()
     
