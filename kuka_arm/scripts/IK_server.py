@@ -138,7 +138,7 @@ def handle_calculate_IK(req, KCalc):
 def IK_server(KCalc):
     # initialize node and declare calculate_ik service
     rospy.init_node('IK_server')
-    s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
+    s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK(req, KCalc))
     print("Ready to receive an IK request")
     rospy.spin()
 
