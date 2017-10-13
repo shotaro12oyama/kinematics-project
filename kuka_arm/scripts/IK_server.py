@@ -133,7 +133,7 @@ def handle_calculate_IK(req):
         return CalculateIKResponse(joint_trajectory_list)
 
 
-def IK_server(KCalc):
+def IK_server():
     # initialize node and declare calculate_ik service
     rospy.init_node('IK_server')
     s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
@@ -141,5 +141,5 @@ def IK_server(KCalc):
     rospy.spin()
 
 if __name__ == "__main__":
-    IK_server(KC)
+    IK_server()
     
