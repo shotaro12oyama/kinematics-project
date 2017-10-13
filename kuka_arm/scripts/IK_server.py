@@ -102,7 +102,7 @@ class KCalc():
     print("Initialize Parameters")
 
 
-def handle_calculate_IK(req):
+def handle_calculate_IK(req, KCalc):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
     if len(req.poses) < 1:
         print("No valid poses received")
@@ -124,7 +124,7 @@ def handle_calculate_IK(req):
                 [req.poses[x].orientation.x, req.poses[x].orientation.y,
                     req.poses[x].orientation.z, req.poses[x].orientation.w])
             
-            theta = KC.IK_parameter(px, py, pz, roll, pitch, yaw)
+            theta = KCalc.IK_parameter(px, py, pz, roll, pitch, yaw)
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
@@ -135,7 +135,7 @@ def handle_calculate_IK(req):
         return CalculateIKResponse(joint_trajectory_list)
 
 
-def IK_server():
+def IK_server(KCalc):
     # initialize node and declare calculate_ik service
     rospy.init_node('IK_server')
     s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
@@ -144,5 +144,5 @@ def IK_server():
 
 if __name__ == "__main__":
     KC = KCalc()
-    IK_server()
+    IK_server(KC)
     
