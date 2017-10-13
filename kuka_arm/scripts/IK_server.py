@@ -43,14 +43,15 @@ class KCalc():
         return TF
 
     # Create individual transformation matrices
-    T0_1 = TF_Matrix(alpha0, a0, d1, q1).subs(DH_Table)
-    T1_2 = TF_Matrix(alpha1, a1, d2, q2).subs(DH_Table)
-    T2_3 = TF_Matrix(alpha2, a2, d3, q3).subs(DH_Table)
-    T3_4 = TF_Matrix(alpha3, a3, d4, q4).subs(DH_Table)
-    T4_5 = TF_Matrix(alpha4, a4, d5, q5).subs(DH_Table)
-    T5_6 = TF_Matrix(alpha5, a5, d6, q6).subs(DH_Table)
-    T6_EE = TF_Matrix(alpha6, a6, d7, q7).subs(DH_Table)
-    T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
+    def __init__(self):
+        self.T0_1 = TF_Matrix(alpha0, a0, d1, q1).subs(DH_Table)
+        self.T1_2 = TF_Matrix(alpha1, a1, d2, q2).subs(DH_Table)
+        self.T2_3 = TF_Matrix(alpha2, a2, d3, q3).subs(DH_Table)
+        self.T3_4 = TF_Matrix(alpha3, a3, d4, q4).subs(DH_Table)
+        self.T4_5 = TF_Matrix(alpha4, a4, d5, q5).subs(DH_Table)
+        self.T5_6 = TF_Matrix(alpha5, a5, d6, q6).subs(DH_Table)
+        self.T6_EE = TF_Matrix(alpha6, a6, d7, q7).subs(DH_Table)
+        self.T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 
     def IK_parameter(px, py, pz, roll, pitch, yaw):
         # Find EE rotation matrix
@@ -102,7 +103,7 @@ class KCalc():
     print("Initialize Parameters")
 
 
-def handle_calculate_IK(req, KCalc):
+def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
     if len(req.poses) < 1:
         print("No valid poses received")
@@ -124,7 +125,7 @@ def handle_calculate_IK(req, KCalc):
                 [req.poses[x].orientation.x, req.poses[x].orientation.y,
                     req.poses[x].orientation.z, req.poses[x].orientation.w])
             
-            theta = KCalc.IK_parameter(px, py, pz, roll, pitch, yaw)
+            theta = KC.IK_parameter(px, py, pz, roll, pitch, yaw)
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
@@ -138,7 +139,7 @@ def handle_calculate_IK(req, KCalc):
 def IK_server(KCalc):
     # initialize node and declare calculate_ik service
     rospy.init_node('IK_server')
-    s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK(req, KCalc))
+    s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
     print("Ready to receive an IK request")
     rospy.spin()
 
