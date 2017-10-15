@@ -17,12 +17,14 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
 from mpmath import *
 from sympy import *
+import numpy as np
 
 ## create symbols
 d1, d2, d3, d4, d5, d6, d7 = symbols('d1:8') # link offset
 a0, a1, a2, a3, a4, a5, a6 = symbols('a0:7') # link length
 alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # twist angle
 q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8') # joint angle symbols
+pi = np.pi
 
 # More information can be found in KR210 Forward Kinematics section
 DH_Table = {    alpha0:      0, a0:      0,   d1:  0.75,   q1:         q1,
