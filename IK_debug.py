@@ -10,6 +10,24 @@ Format of test case is [ [[EE position],[EE orientation as quaternions]],[WC loc
 You can generate additional test cases by setting up your kuka project and running `$ roslaunch kuka_arm forward_kinematics.launch`
 From here you can adjust the joint angles to find thetas, use the gripper to extract positions and orientation (in quaternion xyzw) and lastly use link 5
 to find the position of the wrist center. These newly generated test cases can be added to the test_cases dictionary.
+
+(original)
+test_cases = {1:[[[2.16135,-1.42635,1.55109],
+                  [0.708611,0.186356,-0.157931,0.661967]],
+                  [1.89451,-1.44302,1.69366],
+                  [-0.65,0.45,-0.36,0.95,0.79,0.49]],
+              2:[[[-0.56754,0.93663,3.0038],
+                  [0.62073, 0.48318,0.38759,0.480629]],
+                  [-0.638,0.64198,2.9988],
+                  [-0.79,-0.11,-2.33,1.94,1.14,-3.68]],
+              3:[[[-1.3863,0.02074,0.90986],
+                  [0.01735,-0.2179,0.9025,0.371016]],
+                  [-1.1669,-0.17989,0.85137],
+                  [-2.99,-0.12,0.94,4.06,1.29,-4.12]],
+              4:[],
+              5:[]}
+
+
 '''
 
 test_cases = {1:[[[2.16135,-1.42635,1.55109],
