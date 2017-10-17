@@ -119,13 +119,20 @@ def test_code(test_case):
 
     T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 
-    print("T0_1 = ", T0_1)
-    print("T0_2 = ", simplify(T0_1 * T1_2))
-    print("T0_3 = ", simplify(T0_1 * T1_2 * T2_3))
-    print("T0_4 = ", simplify(T0_1 * T1_2 * T2_3 * T3_4))
-    print("T0_5 = ", simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5))
-    print("T0_6 = ", simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6))
-    print("T0_6 = ", simplify(T0_EE))
+    T0_2 = simplify(T0_1 * T1_2)
+    T0_3 = simplify(T0_1 * T1_2 * T2_3)
+    T0_4 = simplify(T0_1 * T1_2 * T2_3 * T3_4)
+    T0_5 = simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5)
+    T0_6 = simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6)
+    T0_6 = simplify(T0_EE)
+
+    print("T0_1 = ", T0_1.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
+    print("T0_2 = ", T0_2.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
+    print("T0_3 = ", T0_3.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
+    print("T0_4 = ", T0_4.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
+    print("T0_5 = ", T0_5.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
+    print("T0_6 = ", T0_6.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
+    print("T0_EE = ", T0_EE.evalf(subs=({q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})))
 
 
     # Extract end-effector position and orientation from request
