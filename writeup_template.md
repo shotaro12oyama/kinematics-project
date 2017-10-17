@@ -14,9 +14,10 @@
 
 [//]: # (Image References)
 
-[image1]: ./misc_images/misc1.png
-[image2]: ./misc_images/misc3.png
-[image3]: ./misc_images/misc2.png
+[image1]: ./DH_parameter.png
+[image2]: ./DH_parameter2.png
+[image3]: ./misc_images/misc3.png
+[image4]: ./misc_images/misc2.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -25,28 +26,37 @@
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 
-Here is an example of how to include an image in your writeup.
 
+With reference to the lesson video and rviz window opend by the command "roslaunch kuka_arm forward_kinematics.launch", I made DH parameters as follows. 
+##### DH_parameters
+Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
+---   | ---        | ---    | ---    | ---
+0->1  | 0          | 0      | 0.75   | theta1
+1->2  | -90        | 0.35   | 0      | theta2-90
+2->3  | 0          | 1.25   | 0      | theta3
+3->4  | -90        | -0.054 | 1.5    | theta4
+4->5  | 90         | 0      | 0      | theta5
+5->6  | -90        | 0      | 0      | theta6
+6->EE | 0          | 0      | 0.303  | 0
+
+##### link and each parameters location
 ![alt text][image1]
+
+##### urdf file (abstract)
+![alt text][image2]
+
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
---- | --- | --- | --- | ---
-0->1 | 0 | 0 | L1 | qi
-1->2 | - pi/2 | L2 | 0 | -pi/2 + q2
-2->3 | 0 | 0 | 0 | 0
-3->4 |  0 | 0 | 0 | 0
-4->5 | 0 | 0 | 0 | 0
-5->6 | 0 | 0 | 0 | 0
-6->EE | 0 | 0 | 0 | 0
+
+
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
 And here's where you can draw out and show your math for the derivation of your theta angles. 
 
-![alt text][image2]
+![alt text][image3]
 
 ### Project Implementation
 
@@ -57,6 +67,6 @@ Here I'll talk about the code, what techniques I used, what worked and why, wher
 
 
 And just for fun, another example image:
-![alt text][image3]
+![alt text][image4]
 
 
