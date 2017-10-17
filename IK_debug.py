@@ -120,12 +120,12 @@ def test_code(test_case):
     T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 
     print("T0_1 = ", T0_1)
-    print("T0_2 = ", T0_1 * T1_2)
-    print("T0_3 = ", T0_1 * T1_2 * T2_3)
-    print("T0_4 = ", T0_1 * T1_2 * T2_3 * T3_4)
-    print("T0_5 = ", T0_1 * T1_2 * T2_3 * T3_4 * T4_5)
-    print("T0_6 = ", T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6)
-    print("T0_6 = ", T0_EE)
+    print("T0_2 = ", simplify(T0_1 * T1_2))
+    print("T0_3 = ", simplify(T0_1 * T1_2 * T2_3))
+    print("T0_4 = ", simplify(T0_1 * T1_2 * T2_3 * T3_4))
+    print("T0_5 = ", simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5))
+    print("T0_6 = ", simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6))
+    print("T0_6 = ", simplify(T0_EE))
 
 
     # Extract end-effector position and orientation from request
