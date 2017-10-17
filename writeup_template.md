@@ -17,7 +17,7 @@
 [image1]: ./DH_parameter.png
 [image2]: ./DH_parameter2.png
 [image3]: ./misc_images/misc3.png
-[image4]: ./misc_images/misc2.png
+[image4]: ./result.jpg
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -42,13 +42,22 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 ##### link and each parameters location
 ![alt text][image1]
 
-##### urdf file (abstract)
+##### parameter source (highlighted by Red line)
 ![alt text][image2]
 
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
 
+Link   | transformation matrices (to make it simple, set each theta = 0)
+---    | ---
+T0_1 = | [[1.0,   0,   0,     0],[  0,  1.0,   0,    0],[  0,   0, 1.0,  0.75],[  0,   0,   0,  1.0]]
+T0_2 = | [[  0, 1.0,   0,  0.35],[  0,    0, 1.0,    0],[1.0,   0,   0,  0.75],[  0,   0,   0,  1.0]]
+T0_3 = | [[  0, 1.0,   0,  0.35],[  0,    0, 1.0,    0],[1.0,   0,   0,   2.0],[  0,   0,   0,  1.0]]
+T0_4 = | [[  0,  0,  1.0,  1.85],[  0, -1.0,   0,    0],[1.0,   0,   0, 1.946],[  0,   0,   0,  1.0]]
+T0_5 = | [[  0, 1.0,   0,  1.85],[  0,    0, 1.0,    0],[1.0,   0,   0, 1.946],[  0,   0,   0,  1.0]]
+T0_6 = | [[  0,   0, 1.0, 2.153],[  0, -1.0,   0,    0],[1.0,   0,   0, 1.946],[  0,   0,   0,  1.0]]
+T0_EE= | [[  0,   0, 1.0, 2.153],[  0, -1.0,   0,    0],[1.0,   0,   0, 1.946],[  0,   0,   0,  1.0]]
 
 
 
@@ -66,7 +75,7 @@ And here's where you can draw out and show your math for the derivation of your 
 Here I'll talk about the code, what techniques I used, what worked and why, where the implementation might fail and how I might improve it if I were going to pursue this project further.  
 
 
-And just for fun, another example image:
+example image:
 ![alt text][image4]
 
 
