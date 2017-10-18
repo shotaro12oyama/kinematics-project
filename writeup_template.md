@@ -16,7 +16,7 @@
 
 [image1]: ./DH_parameter.png
 [image2]: ./DH_parameter2.png
-[image3]: ./misc_images/misc3.png
+[image3]: ./wc.png
 [image4]: ./result.jpg
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
@@ -63,31 +63,21 @@ T0_EE= | [[  0,   0, 1.0, 2.153],[  0, -1.0,   0,    0],[1.0,   0,   0, 1.946],[
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
-the last three joints in a manipulator are revolute joints that satisfy condition 1, such a design is called a spherical wrist and the common point of intersection is called the wrist center. The advantage of such a design is that it kinematically decouples the position and orientation of the end effector
-It is now possible to independently solve two simpler problems: first, the Cartesian coordinates of the wrist center, and then the composition of rotations to orient the end effector. a six degree of freedom serial manipulator with a spherical wrist would use the first three joints to control the position of the wrist center while the last three joints would orient the end effector as needed.
+The last three joints in a manipulator are revolute joints and those intersect at a single point, namely it is called so call spherical wrist. So we can think the Cartesian coordinates of the wrist center first, and next the composition of rotations to orient the end effector. 
 
-    r, p, y = symbols('r p y')
-    ROT_x = Matrix([[1,       0,       0],
-                    [0,  cos(r), -sin(r)],
-                    [0,  sin(r),  cos(r)]])  # ROLL
-    ROT_y = Matrix([[cos(p),  0,  sin(p)],
-                    [0,       1,       0],
-                    [-sin(p), 0,  cos(p)]])  # PITCH
-    ROT_z = Matrix([[cos(y), -sin(y),  0],
-                    [sin(y),  cos(y),  0],
-                    [0,       0,       1]])  # YAW
-    ROT_EE = ROT_z * ROT_y * ROT_x
-    # More information can be found in KR210 Forward Kinematics section
-    Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
-    ROT_EE = ROT_EE * Rot_Error
-    ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
-    EE = Matrix([[px],
-                 [py],
-                 [pz]])
-    WC = EE - (0.303) * ROT_EE[:, 2]
+Based on the above, we calculate inverse kinematics, with the relationship among each parameters as below.
 
-    # Calculate joint angles using Geomatric IK method
-    theta1 = atan2(WC[1], WC[0])
+![alt text][image3]
+
+
+
+##### equations
+
+
+
+* Wrist Center = End Effector (value is from Ros jointtrajectorypoint)  - (0.303) * Rotation Matrix (DH parameter of Link6->EE above) 
+
+* theta1 = atan2(WC[1], WC[0])
     # SSS triangle for theta2 and theta3
     side_a = 1.501
     side_b = sqrt(pow((sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35),2) + pow((WC[2] - 0.75), 2))
