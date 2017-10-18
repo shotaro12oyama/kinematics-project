@@ -65,29 +65,13 @@ T0_EE= | [[  0,   0, 1.0, 2.153],[  0, -1.0,   0,    0],[1.0,   0,   0, 1.946],[
 
 The last three joints in a manipulator are revolute joints and those intersect at a single point, namely it is called so call spherical wrist. So we can think the Cartesian coordinates of the wrist center first, and next the composition of rotations to orient the end effector. 
 
-Based on the above, we calculate inverse kinematics, with the relationship among each parameters as below.
-
-![alt text][image3]
-
-
-
 ##### equations
-
-
 
 * Wrist Center = End Effector (value is from Ros jointtrajectorypoint)  - (0.303) * Rotation Matrix (DH parameter of Link6->EE above) 
 
-* theta1 = atan2(WC[1], WC[0])
-    # SSS triangle for theta2 and theta3
-    side_a = 1.501
-    side_b = sqrt(pow((sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35),2) + pow((WC[2] - 0.75), 2))
-    side_c = 1.25
-
-    angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
-    angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
-    angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
-
-    theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35)
+* theta1 = atan2(Wrist Center(Y_axis), Wrist Center(X_axis))
+* 
+** theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35)
     theta3 = pi / 2 - (angle_b + 0.036)  # 0.036 accounts for sag in link4 of -0.054m
 
     R0_3 = T0_1[0:3, 0:3] * T1_2[0:3, 0:3] * T2_3[0:3, 0:3]
