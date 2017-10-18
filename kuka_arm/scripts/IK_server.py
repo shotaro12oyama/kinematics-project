@@ -97,7 +97,6 @@ def IK_parameter(px, py, pz, roll, pitch, yaw):
     theta5 = atan2(sqrt(R3_6[0,2] * R3_6[0,2] + R3_6[2,2] * R3_6[2,2]), R3_6[1,2])
     theta6 = atan2(-R3_6[1,1], R3_6[1,0])
     theta = [theta1, theta2, theta3, theta4, theta5, theta6]
-    print(theta)
     return theta
 
 
