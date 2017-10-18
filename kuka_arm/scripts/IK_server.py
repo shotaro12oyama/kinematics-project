@@ -24,7 +24,6 @@ a0, a1, a2, a3, a4, a5, a6 = symbols('a0:7') # link length
 alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # twist angle
 q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8') # joint angle symbols
 
-# More information can be found in KR210 Forward Kinematics section
 DH_Table = {    alpha0:      0, a0:      0,   d1:  0.75,   q1:         q1,
                 alpha1:  -pi/2, a1:   0.35,   d2:     0,   q2: -pi/2 + q2,
                 alpha2:      0, a2:   1.25,   d3:     0,   q3:         q3,
@@ -65,7 +64,6 @@ def IK_parameter(px, py, pz, roll, pitch, yaw):
                     [sin(y),  cos(y),  0],
                     [0,       0,       1]])  # YAW
     ROT_EE = ROT_z * ROT_y * ROT_x
-    # More information can be found in KR210 Forward Kinematics section
     Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     ROT_EE = ROT_EE * Rot_Error
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
@@ -92,7 +90,6 @@ def IK_parameter(px, py, pz, roll, pitch, yaw):
     R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3: theta3})
     R3_6 = R0_3.transpose() * ROT_EE
     # Eular angles from rotation matrix
-    # More information can be found in the Eular Angles from a Rotation Matrix section
     theta4 = atan2(R3_6[2,2], -R3_6[0,2])
     theta5 = atan2(sqrt(R3_6[0,2] * R3_6[0,2] + R3_6[2,2] * R3_6[2,2]), R3_6[1,2])
     theta6 = atan2(-R3_6[1,1], R3_6[1,0])
