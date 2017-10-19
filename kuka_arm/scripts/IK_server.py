@@ -75,10 +75,10 @@ def IK_parameter(px, py, pz, roll, pitch, yaw):
     # Calculate joint angles using Geomatric IK method
     theta1 = atan2(WC[1], WC[0])
     # SSS triangle for theta2 and theta3
-    side_a = 1.501
+    side_a = 1.5 # d4 in DH parameter 
     side_b = sqrt(pow((sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35),2) + pow((WC[2] - 0.75), 2))
-    side_c = 1.25
-
+    side_c = 1.25 # a2 in DH parameter
+    # by cosine rule
     angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
     angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
     angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
@@ -86,6 +86,7 @@ def IK_parameter(px, py, pz, roll, pitch, yaw):
     theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35)
     theta3 = pi / 2 - (angle_b + 0.036)  # 0.036 accounts for sag in link4 of -0.054m
 
+    # Rotation Matrix is 3x3 from Transformation Matrix
     R0_3 = T0_1[0:3, 0:3] * T1_2[0:3, 0:3] * T2_3[0:3, 0:3]
     R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3: theta3})
     R3_6 = R0_3.transpose() * ROT_EE
