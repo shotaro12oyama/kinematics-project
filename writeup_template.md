@@ -17,7 +17,9 @@
 [image1]: ./DH_parameter.png
 [image2]: ./DH_parameter2.png
 [image3]: ./wc.png
-[image4]: ./result.jpg
+[image4]: ./wc2.png
+[image5]: ./wc3.png
+[image6]: ./result.jpg
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -65,6 +67,28 @@ T0_EE= | [[  0,   0, 1.0, 2.153],[  0, -1.0,   0,    0],[1.0,   0,   0, 1.946],[
 
 The last three joints in a manipulator are revolute joints and those intersect at a single point, namely it is called so call spherical wrist. So we can think the Cartesian coordinates of the wrist center first, and next the composition of rotations to orient the end effector. the equations are in the IK_server.py line No.53- def IK_parameter.
 
+Based on the geometric figures as below, I derived each angle theta as follows.
+* I derived wrist center from end effector point from jointtrajectorypoint and minus d6 in DH parameter after rotating it pi by z-axis, -pi/2 by Y-axis for collect the difference between the URDF and DH Parameter. (Line No. 56-73 in IK_Server.py)
+
+![alt text][image3]
+
+* theta1: By the position of wrist center, I calculated theta1 = atan2(y_postion of wrist center, x_position of wrist center)
+
+* theta2:  
+
+* theta3 = 
+
+
+![alt text][image4]
+
+* theta4 = 
+
+* theta5 =
+
+* theta6 =
+
+
+
 ### Project Implementation
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
@@ -79,6 +103,6 @@ I guess in the practical situation, we need to consider other factors such as th
 
 
 example image:
-![alt text][image4]
+![alt text][image6]
 
 
