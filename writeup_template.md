@@ -72,20 +72,20 @@ Based on the geometric figures as below, I derived each angle theta as follows.
 
 ![alt text][image3]
 
-* theta1: By the position of wrist center, I calculated theta1 = atan2(y_postion of wrist center, x_position of wrist center)
+* theta1: By the position of wrist center (Joint 5), I calculated theta1 = atan2(y_postion of wrist center, x_position of wrist center)
 
-* theta2:  
+* theta2: In the Image below, A = 1.5, B = sqrt((sqrt(wrist center_x^2 + wrist center_y^2)-0.35)^2 + (Wrist center(z)-0.75)^2)
+, C = 1.25 from DH parameters. Then, by cosine rule, a = acos((B-^2 + C^2 - A^2) / (2 * B * C)), b = acos((A^2 + C^2 - B^2) / (2 * A * C)), c = acos((A^2 + B^2 - C^2) / (2 * A * B)). Finally, theta2 = pi/2 - a - atan2(wrist center_z - 0.75, sqrt(writ center_x^2 + wrist_center_y^2WC) - 0.35).
 
-* theta3 = 
-
+* theta3: from the image, theta3 = pi/2 - (b + 0.036). 0.036 accounts for sag in link4 of -0.054m, by atan2(0.054,sqrt(1.5^2 - 0.054^2))
 
 ![alt text][image4]
 
-* theta4 = 
-
-* theta5 =
-
-* theta6 =
+* theta4: First, I calculated rotation martix from joint 0 to 3. Then, substitue theta1, theta2, theta3, and transpose and product with rotation matrix for end effector which is calculated before, to make rotation matrix from joint3 to joint6. Finally, from the elements in rotation matrix, calculate theta4 = atan2(R3_6[2,2], -R3_6[0,2])
+    
+* theta5 = theta5 = atan2(sqrt(R3_6[0,2] * R3_6[0,2] + R3_6[2,2] * R3_6[2,2]), R3_6[1,2])
+    
+* theta6 = atan2(-R3_6[1,1], R3_6[1,0])
 
 
 
