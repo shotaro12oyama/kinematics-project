@@ -64,13 +64,13 @@ def IK_parameter(px, py, pz, roll, pitch, yaw):
                     [sin(y),  cos(y),  0],
                     [0,       0,       1]])  # YAW
     ROT_EE = ROT_z * ROT_y * ROT_x
-    Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
+    Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90)) # Error collection for difference between URDF & DH parameters
     ROT_EE = ROT_EE * Rot_Error
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
     EE = Matrix([[px],
                  [py],
                  [pz]])
-    WC = EE - (0.303) * ROT_EE[:, 2]
+    WC = EE - (0.303) * ROT_EE[:, 2] # WC position from DH parameter
 
     # Calculate joint angles using Geomatric IK method
     theta1 = atan2(WC[1], WC[0])
